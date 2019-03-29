@@ -6,7 +6,7 @@
 /*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:53:30 by akorchyn          #+#    #+#             */
-/*   Updated: 2019/03/29 22:52:54 by akorchyn         ###   ########.fr       */
+/*   Updated: 2019/03/29 23:33:33 by akorchyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	iso(t_point * const original)
 
 	previous_x = original->x;
 	previous_y = original->y;
-	original->x = (previous_x - previous_y) * cos(TO_RADS(90));
-	original->y = ((previous_x + previous_y) * sin(TO_RADS(90)) - original->z);
+	original->x = (previous_x - previous_y) * cos(TO_RADS(30));
+	original->y = ((previous_x + previous_y) * sin(TO_RADS(30)) - original->z);
 }
 
 t_point	get_work_point(t_point const *point, t_fdf *core)
@@ -58,9 +58,8 @@ t_point	get_work_point(t_point const *point, t_fdf *core)
 	res.y *= core->camera->zoom;
 	res.z *= core->camera->zoom;
 	core->cur_projection(&res);
-	res.y += 200;
-	res.z += 100;
-	res.x += 100;
+	res.y += (double)(HEIGHT - core->rows * core->camera->zoom) / 2 + core->camera->x;
+	res.x += (double)(WIDTH - core->columns * core->camera->zoom) / 2  + core->camera->y;
 	i++;
 	return res;
 }
@@ -124,8 +123,8 @@ int main(int ac, char **av)
 	core.camera = &camera;
 	core.window = &window;
 	core.camera->zoom = 25;
-	core.camera->x = WIDTH / 2;
-	core.camera->y = HEIGHT / 2;
+	core.camera->x = 0;
+	core.camera->y = 0;
 	parse(av[1], &core);
 	configure_mlx(core.window);
 	core.window->color = 0xffffff;

@@ -65,7 +65,6 @@ void		drawline(t_point one, t_point two, t_window *win)
 
 	d.x = (two.x > one.x) ? two.x - one.x : one.x - two.x;
 	d.y = (two.y > one.y) ? two.y - one.y : one.y - two.y;
-
 	if (d.x == 0.0 || d.y == 0.0)
 		print_line(&one, &two, win);
 	else if (d.y < d.x)
