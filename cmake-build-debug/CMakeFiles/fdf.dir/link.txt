@@ -1,0 +1,1 @@
+/usr/bin/cc  -no-pie -lX11 -lXext -g   CMakeFiles/fdf.dir/main.c.o CMakeFiles/fdf.dir/parse.c.o CMakeFiles/fdf.dir/draw_line.c.o CMakeFiles/fdf.dir/swaps.c.o  -o fdf ../libft/libft.a /usr/local/lib/libmlx.a /usr/lib/x86_64-linux-gnu/libSM.so /usr/lib/x86_64-linux-gnu/libICE.so /usr/lib/x86_64-linux-gnu/libX11.so /usr/lib/x86_64-linux-gnu/libXext.so -lm 

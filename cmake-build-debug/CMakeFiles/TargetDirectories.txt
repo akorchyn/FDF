@@ -1,0 +1,3 @@
+/home/omegan4ik/Desktop/FDF/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/omegan4ik/Desktop/FDF/cmake-build-debug/CMakeFiles/fdf.dir
+/home/omegan4ik/Desktop/FDF/cmake-build-debug/CMakeFiles/edit_cache.dir
