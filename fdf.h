@@ -42,10 +42,20 @@ typedef struct	s_woo
 	t_point		two;
 }				t_woo;
 
+typedef struct	s_image
+{
+	void		*img;
+	char		*matrix;
+	int 		bpp;
+	int			endian;
+	int 		size_line;
+}				t_image;
+
 typedef struct	s_window
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	t_image		img;
 	int 		color;
 }				t_window;
 
@@ -60,7 +70,7 @@ typedef struct	s_camera
 
 typedef struct	s_fdf
 {
-	t_window	window;
+	t_window	*window;
 	t_point		**matrix;
 	t_point		**work;
 	t_camera	*camera;

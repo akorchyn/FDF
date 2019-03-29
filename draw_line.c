@@ -1,74 +1,83 @@
 #include "fdf.h"
 
-static double fpart(double x)
+void		put_img_pixel(t_image *img, int x, int y, unsigned color)
 {
-	int y = x;
-
-	return (x - y);
+	if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT)
+		return ;
+	*(int *)(img->matrix + (y * WIDTH + x) * img->bpp) = color;
 }
 
-static double rfpart(double x)
+void		print_line(t_point *one, t_point *two, t_window *win)
 {
-	return (1 - fpart(x));
+	int		y;
+	int 	x;
+
+	y = one->y - 1;
+	while (++y < two->y + 1)
+	{
+		x = one->x - 1;
+		while (++x < two->x + 1)
+			put_img_pixel(&win->img, x, y, win->color);
+	}
 }
 
-static void		start_line(t_point *one, t_point *two, t_window *win, t_woo *x)
+void		x_line(t_point *one, t_point *two, t_window *win, t_point *d)
 {
-	double xend;
-	double xgap;
-	double yend;
+	double	grad;
+	double	intery;
+	int 	x;
 
-	x->gradient = (two->y - one->y) / (two->x - one->x);
-	xend = round(one->x);
-	yend = one->y + x->gradient * (xend - one->x);
-	xgap = rfpart(one->x + 0.5);
-	x->one.x = xend;
-	x->one.y = (int)yend;
-	mlx_pixel_put(win->mlx_ptr, win->win_ptr, x->one.x, x->one.y,
-				  win->color * rfpart(yend) * xgap);
-	mlx_pixel_put(win->mlx_ptr, win->win_ptr, one->x, x->one.y + 1,
-				  win->color * fpart(yend) * xgap);
-	x->intery = yend + x->gradient;
+	grad = d->y / d->x;
+	intery = one->y + grad;
+	put_img_pixel(&win->img, one->x, one->y, win->color);
+	x = one->x;
+	while (++x < two->x)
+	{
+		put_img_pixel(&win->img, x, (int)intery, win->color);   // 1 - fPart(intery)
+		put_img_pixel(&win->img, x, (int)intery + 1, win->color); // (int)(fpart(intery))
+		intery += grad;
+	}
+	put_img_pixel(&win->img, two->x, two->y, win->color);
 }
 
-static void		end_line(t_point *two, t_window *win, t_woo *x)
+void		y_line(t_point *one, t_point *two, t_window *win, t_point *d)
 {
-	double xend;
-	double xgap;
-	double yend;
+	double	grad;
+	double	interx;
+	int 	y;
 
-	xend = round(two->x);
-	yend = two->y + x->gradient * (xend - two->x);
-	xgap = fpart(two->x + 0.5);
-	x->two.x = xend;
-	x->two.y = (int)yend;
-	mlx_pixel_put(win->mlx_ptr, win->win_ptr, x->two.x, x->two.y,
-				  win->color * rfpart(yend) * xgap);
-	mlx_pixel_put(win->mlx_ptr, win->win_ptr, x->two.x, x->two.y + 1,
-				  win->color * fpart(yend) * xgap);
+	grad = d->x / d->y;
+	interx = one->x + grad;
+	put_img_pixel(&win->img, one->x, one->y, win->color);
+	y = one->y;
+	while (++y < two->y)
+	{
+		put_img_pixel(&win->img, (int)interx, y, win->color);
+		put_img_pixel(&win->img, (int)interx + 1, y, win->color ); // (int)(fpart(intery))
+		interx += grad;
+	}
+	put_img_pixel(&win->img, two->x, two->y, win->color);
 }
 
 void		drawline(t_point one, t_point two, t_window *win)
 {
-	t_woo	x;
-	int 	i;
+	t_point d;
 
-	if (ABS(two.x - one.x) < ABS(two.y - one.y))
+	d.x = (two.x > one.x) ? two.x - one.x : one.x - two.x;
+	d.y = (two.y > one.y) ? two.y - one.y : one.y - two.y;
+
+	if (d.x == 0.0 || d.y == 0.0)
+		print_line(&one, &two, win);
+	else if (d.y < d.x)
 	{
-		swap_float(&one.x, &one.y);
-		swap_float(&two.x, &two.y);
+		if (two.x < one.x)
+			swap_point(&one, &two);
+		x_line(&one, &two, win, &d);
 	}
-	if (two.x < one.x)
-		swap_point(&one, &two);
-	start_line(&one, &two, win, &x);
-	end_line(&two, win, &x);
-	i = (int)round(x.one.x);
-	while (++i < x.two.x + 1)
+	else
 	{
-		mlx_pixel_put(win->mlx_ptr, win->win_ptr, i, (int)(x.intery),
-					  win->color * rfpart(x.intery));
-		mlx_pixel_put(win->mlx_ptr, win->win_ptr, i, (int)x.intery + 1,
-					  win->color * fpart(x.intery));
-		x.intery += x.gradient;
+		if (two.y < one.y)
+			swap_point(&one, &two);
+		y_line(&one, &two, win, &d);
 	}
 }

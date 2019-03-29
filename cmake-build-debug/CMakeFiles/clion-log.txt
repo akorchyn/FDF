@@ -1,4 +1,4 @@
-/snap/clion/67/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/omegan4ik/Desktop/FDF
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/akorchyn/fdf
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/omegan4ik/Desktop/FDF/cmake-build-debug
+-- Build files have been written to: /Users/akorchyn/fdf/cmake-build-debug
