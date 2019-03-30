@@ -59,45 +59,45 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/akorchyn/fdf
+CMAKE_SOURCE_DIR = /Volumes/Storage/goinfre/akorchyn/fdf
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/akorchyn/fdf/cmake-build-debug
+CMAKE_BINARY_DIR = /Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/fdf.dir
+# Target rules for target CMakeFiles/fdf2.dir
 
 # All Build rule for target.
-CMakeFiles/fdf.dir/all:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/depend
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/akorchyn/fdf/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5 "Built target fdf"
-.PHONY : CMakeFiles/fdf.dir/all
+CMakeFiles/fdf2.dir/all:
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/depend
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5 "Built target fdf2"
+.PHONY : CMakeFiles/fdf2.dir/all
 
 # Include target in all.
-all: CMakeFiles/fdf.dir/all
+all: CMakeFiles/fdf2.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/fdf.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/akorchyn/fdf/cmake-build-debug/CMakeFiles 5
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/fdf.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/akorchyn/fdf/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/fdf.dir/rule
+CMakeFiles/fdf2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/CMakeFiles 5
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/fdf2.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/fdf2.dir/rule
 
 # Convenience name for target.
-fdf: CMakeFiles/fdf.dir/rule
+fdf2: CMakeFiles/fdf2.dir/rule
 
-.PHONY : fdf
-
-# clean rule for target.
-CMakeFiles/fdf.dir/clean:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/clean
-.PHONY : CMakeFiles/fdf.dir/clean
+.PHONY : fdf2
 
 # clean rule for target.
-clean: CMakeFiles/fdf.dir/clean
+CMakeFiles/fdf2.dir/clean:
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/clean
+.PHONY : CMakeFiles/fdf2.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/fdf2.dir/clean
 
 .PHONY : clean
 

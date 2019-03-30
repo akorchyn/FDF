@@ -34,14 +34,6 @@ typedef struct	s_point
 	int			color;
 }				t_point;
 
-typedef struct	s_woo
-{
-	double		gradient;
-	double		intery;
-	t_point		one;
-	t_point		two;
-}				t_woo;
-
 typedef struct	s_image
 {
 	void		*img;
@@ -72,7 +64,6 @@ typedef struct	s_fdf
 {
 	t_window	*window;
 	t_point		**matrix;
-	t_point		**work;
 	t_camera	*camera;
 	projection	cur_projection;
 	int 		columns;

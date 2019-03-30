@@ -48,10 +48,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/akorchyn/fdf
+CMAKE_SOURCE_DIR = /Volumes/Storage/goinfre/akorchyn/fdf
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/akorchyn/fdf/cmake-build-debug
+CMAKE_BINARY_DIR = /Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/akorchyn/fdf/cmake-build-debug/CMakeFiles /Users/akorchyn/fdf/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/CMakeFiles /Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/akorchyn/fdf/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named fdf
+# Target rules for targets named fdf2
 
 # Build rule for target.
-fdf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 fdf
-.PHONY : fdf
+fdf2: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 fdf2
+.PHONY : fdf2
 
 # fast build rule for target.
-fdf/fast:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/build
-.PHONY : fdf/fast
+fdf2/fast:
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/build
+.PHONY : fdf2/fast
 
 draw_line.o: draw_line.c.o
 
@@ -129,7 +129,7 @@ draw_line.o: draw_line.c.o
 
 # target to build an object file
 draw_line.c.o:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/draw_line.c.o
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/draw_line.c.o
 .PHONY : draw_line.c.o
 
 draw_line.i: draw_line.c.i
@@ -138,7 +138,7 @@ draw_line.i: draw_line.c.i
 
 # target to preprocess a source file
 draw_line.c.i:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/draw_line.c.i
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/draw_line.c.i
 .PHONY : draw_line.c.i
 
 draw_line.s: draw_line.c.s
@@ -147,7 +147,7 @@ draw_line.s: draw_line.c.s
 
 # target to generate assembly for a file
 draw_line.c.s:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/draw_line.c.s
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/draw_line.c.s
 .PHONY : draw_line.c.s
 
 main.o: main.c.o
@@ -156,7 +156,7 @@ main.o: main.c.o
 
 # target to build an object file
 main.c.o:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/main.c.o
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/main.c.o
 .PHONY : main.c.o
 
 main.i: main.c.i
@@ -165,7 +165,7 @@ main.i: main.c.i
 
 # target to preprocess a source file
 main.c.i:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/main.c.i
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/main.c.i
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -174,7 +174,7 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/main.c.s
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/main.c.s
 .PHONY : main.c.s
 
 parse.o: parse.c.o
@@ -183,7 +183,7 @@ parse.o: parse.c.o
 
 # target to build an object file
 parse.c.o:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/parse.c.o
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/parse.c.o
 .PHONY : parse.c.o
 
 parse.i: parse.c.i
@@ -192,7 +192,7 @@ parse.i: parse.c.i
 
 # target to preprocess a source file
 parse.c.i:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/parse.c.i
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/parse.c.i
 .PHONY : parse.c.i
 
 parse.s: parse.c.s
@@ -201,7 +201,7 @@ parse.s: parse.c.s
 
 # target to generate assembly for a file
 parse.c.s:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/parse.c.s
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/parse.c.s
 .PHONY : parse.c.s
 
 swaps.o: swaps.c.o
@@ -210,7 +210,7 @@ swaps.o: swaps.c.o
 
 # target to build an object file
 swaps.c.o:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/swaps.c.o
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/swaps.c.o
 .PHONY : swaps.c.o
 
 swaps.i: swaps.c.i
@@ -219,7 +219,7 @@ swaps.i: swaps.c.i
 
 # target to preprocess a source file
 swaps.c.i:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/swaps.c.i
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/swaps.c.i
 .PHONY : swaps.c.i
 
 swaps.s: swaps.c.s
@@ -228,7 +228,7 @@ swaps.s: swaps.c.s
 
 # target to generate assembly for a file
 swaps.c.s:
-	$(MAKE) -f CMakeFiles/fdf.dir/build.make CMakeFiles/fdf.dir/swaps.c.s
+	$(MAKE) -f CMakeFiles/fdf2.dir/build.make CMakeFiles/fdf2.dir/swaps.c.s
 .PHONY : swaps.c.s
 
 # Help Target
@@ -239,7 +239,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... fdf"
+	@echo "... fdf2"
 	@echo "... draw_line.o"
 	@echo "... draw_line.i"
 	@echo "... draw_line.s"

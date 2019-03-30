@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Volumes/Storage/goinfre/akorchyn/fdf/draw_line.c
-fdf.h
-/Volumes/Storage/goinfre/akorchyn/fdf/fdf.h
-
 /Volumes/Storage/goinfre/akorchyn/fdf/fdf.h
 math.h
 -
@@ -49,14 +45,6 @@ fcntl.h
 -
 
 /Volumes/Storage/goinfre/akorchyn/fdf/main.c
-fdf.h
-/Volumes/Storage/goinfre/akorchyn/fdf/fdf.h
-
-/Volumes/Storage/goinfre/akorchyn/fdf/parse.c
-fdf.h
-/Volumes/Storage/goinfre/akorchyn/fdf/fdf.h
-
-/Volumes/Storage/goinfre/akorchyn/fdf/swaps.c
 fdf.h
 /Volumes/Storage/goinfre/akorchyn/fdf/fdf.h
 

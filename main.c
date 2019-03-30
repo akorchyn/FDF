@@ -6,7 +6,7 @@
 /*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:53:30 by akorchyn          #+#    #+#             */
-/*   Updated: 2019/03/29 23:33:33 by akorchyn         ###   ########.fr       */
+/*   Updated: 2019/03/30 23:54:36 by akorchyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,44 +64,23 @@ t_point	get_work_point(t_point const *point, t_fdf *core)
 	return res;
 }
 
-void translate_cordinates(t_fdf *core)
-{
-	int size;
-	int i;
-	int j;
-
-	i = -1;
-	size = core->rows + 1;
-	if (!(core->work = (t_point **)malloc(sizeof(t_point *) * size)))
-		put_error(NULL, "Memory allocation failed", MEMORY_ALLOCATION);
-	while (++i < size - 1)
-	{
-		j = -1;
-		if (!(core->work[i] = malloc(sizeof(t_point) * core->columns)))
-			put_error(NULL, "Memory allocation failed", MEMORY_ALLOCATION);
-		while (++j < core->columns)
-			core->work[i][j] = get_work_point(&core->matrix[i][j], core);
-	}
-	core->work[i] = NULL;
-}
-
-
 void loop(t_fdf *core)
 {
 	int x;
 	int y;
 
 	y = -1;
-	translate_cordinates(core);
-	while (core->work[++y])
+	while (core->matrix[++y])
 	{
 		x = -1;
 		while (++x < core->columns)
 		{
 			if (x != core->columns - 1)
-				drawline(core->work[y][x + 1], core->work[y][x], core->window);
-			if (core->work[y + 1])
-				drawline(core->work[y][x], core->work[y + 1][x], core->window);
+				drawline(get_work_point(&core->matrix[y][x + 1], core),
+					get_work_point(&core->matrix[y][x], core), core->window);
+			if (core->matrix[y + 1])
+				drawline(get_work_point(&core->matrix[y + 1][x], core),
+					get_work_point(&core->matrix[y][x], core), core->window);
 		}
 	}
 	mlx_put_image_to_window(core->window->mlx_ptr, core->window->win_ptr,
@@ -127,11 +106,11 @@ int main(int ac, char **av)
 	core.camera->y = 0;
 	parse(av[1], &core);
 	configure_mlx(core.window);
-	core.window->color = 0xffffff;
+	core.window->color = 0xff0000;
 	core.cur_projection = iso;
 	ft_printf("%d\n", ft_len(core.matrix, 8));
 	loop(&core);
-	ft_printf("%d\n", ft_len(core.work, 8));
+	system("leaks fdf2");
 	mlx_loop(core.window->mlx_ptr);
-	sleep(100);
+//	sleep(100);
 }

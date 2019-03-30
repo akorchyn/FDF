@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/30 23:17:43 by akorchyn          #+#    #+#             */
+/*   Updated: 2019/03/30 23:23:45 by akorchyn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-static int 		open_file(char *filename)
+static int		open_file(char *filename)
 {
 	int		fd;
 	char	*extension;
@@ -10,10 +22,10 @@ static int 		open_file(char *filename)
 		put_error(filename, "Bad extension", FILE_ERROR);
 	if ((fd = open(filename, O_RDONLY)) == -1 || read(fd, NULL, 0) == -1)
 		put_error(filename, strerror(errno), FILE_ERROR);
-	return fd;
+	return (fd);
 }
 
-static t_point	**get_new_pointer(t_point **x)
+static t_point	**increase_matrix(t_point **x)
 {
 	int		size;
 	t_point **new;
@@ -29,12 +41,37 @@ static t_point	**get_new_pointer(t_point **x)
 	return (new);
 }
 
+static int		bad_line(char *tmp)
+{
+	int		(*check_valid)(int);
+
+	check_valid = ft_isdigit;
+	while (*tmp)
+	{
+		while (*tmp && check_valid(*tmp))
+			tmp++;
+		if (*tmp == ' ' || *tmp == '-' || *tmp == '\0')
+		{
+			check_valid = ft_isdigit;
+			(*tmp) && tmp++;
+		}
+		else if (*tmp == ',')
+		{
+			tmp++;
+			check_valid = ft_isxdigit;
+		}
+		else
+			return (1);
+	}
+	return (0);
+}
+
 static t_point	*get_points(char **points, t_fdf *core, int row)
 {
 	int		size;
 	t_point	*result;
-	char 	**numbers;
-	int 	i;
+	char	**numbers;
+	int		i;
 
 	size = ft_len(points, sizeof(char *));
 	i = -1;
@@ -53,27 +90,33 @@ static t_point	*get_points(char **points, t_fdf *core, int row)
 		result[i].color = (numbers[1]) ? ft_hex(numbers[1] + 2) : 0;
 		ft_freesplit(numbers);
 	}
-	return result;
+	return (result);
 }
 
-void		parse(char *filename, t_fdf *core)
+void			parse(char *filename, t_fdf *core)
 {
 	int		fd;
 	char	**points;
-	int 	y;
+	int		y;
+	int		ret;
 	char	*line;
 
 	y = 0;
 	fd = open_file(filename);
-	while (get_next_line(fd, &line))
+	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		core->matrix = get_new_pointer(core->matrix);
+		if (bad_line(line))
+			put_error(filename, "Map error", FILE_ERROR);
+		core->matrix = increase_matrix(core->matrix);
 		if (!(points = ft_strsplit(line, ' ')))
 			put_error(NULL, "Memory allocation failed", MEMORY_ALLOCATION);
 		core->matrix[y] = get_points(points, core, y);
 		y++;
 		ft_freesplit(points);
+		free(line);
 	}
+	if (ret == -1)
+		put_error(filename, "Error file reading", FILE_ERROR);
 	core->rows = y;
 	close(fd);
 }

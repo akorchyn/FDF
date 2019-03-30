@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6"/>
 	<Project>
-		<Option title="fdf"/>
+		<Option title="fdf2"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="clang"/>
 		<Option virtualFolders="CMake Files\;"/>
@@ -37,8 +37,8 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="fdf">
-				<Option output="/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/fdf" prefix_auto="0" extension_auto="0"/>
+			<Target title="fdf2">
+				<Option output="/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/fdf2" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -53,14 +53,14 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/Makefile&quot;  VERBOSE=1 fdf"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/Makefile&quot;  VERBOSE=1 fdf2"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="fdf/fast">
-				<Option output="/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/fdf" prefix_auto="0" extension_auto="0"/>
+			<Target title="fdf2/fast">
+				<Option output="/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/fdf2" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -75,7 +75,7 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/Makefile&quot;  VERBOSE=1 fdf/fast"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/Makefile&quot;  VERBOSE=1 fdf2/fast"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -83,16 +83,16 @@
 			</Target>
 		</Build>
 		<Unit filename="/Volumes/Storage/goinfre/akorchyn/fdf/draw_line.c">
-			<Option target="fdf"/>
+			<Option target="fdf2"/>
 		</Unit>
 		<Unit filename="/Volumes/Storage/goinfre/akorchyn/fdf/main.c">
-			<Option target="fdf"/>
+			<Option target="fdf2"/>
 		</Unit>
 		<Unit filename="/Volumes/Storage/goinfre/akorchyn/fdf/parse.c">
-			<Option target="fdf"/>
+			<Option target="fdf2"/>
 		</Unit>
 		<Unit filename="/Volumes/Storage/goinfre/akorchyn/fdf/swaps.c">
-			<Option target="fdf"/>
+			<Option target="fdf2"/>
 		</Unit>
 		<Unit filename="/Volumes/Storage/goinfre/akorchyn/fdf/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
