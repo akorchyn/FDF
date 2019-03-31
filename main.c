@@ -47,29 +47,88 @@ void	iso(t_point * const original)
 	original->y = ((previous_x + previous_y) * sin(TO_RADS(30)) - original->z);
 }
 
+void	x_rotation(t_point *point, t_fdf *core)
+{
+	double			y;
+	double			z;
+	const t_point	center = {core->columns * core->camera->zoom / 2,
+								core->rows * core->camera->zoom / 2};
+
+	y = point->y - center.y;
+	z = point->z - center.z;
+	core->camera->x_angle = (core->camera->x_angle >= 0) 
+						? core->camera->x_angle % 360
+						: 360 - (ABS(core->camera->x_angle) % -360);
+	point->y = center.y + y * cos(TO_RADS(core->camera->x_angle))
+				+ z * sin(TO_RADS(core->camera->x_angle));
+	point->z = center.z + (-y) * sin(TO_RADS(core->camera->x_angle))
+				+ z * cos(TO_RADS(core->camera->x_angle));
+}
+
+void	y_rotation(t_point *point, t_fdf *core)
+{
+	double			z;
+	double			x;
+	const t_point	center = {core->columns * core->camera->zoom / 2,
+								core->rows * core->camera->zoom / 2};
+
+	z = point->z - center.z;
+	x = point->x - center.x;
+	core->camera->y_angle = (core->camera->y_angle >= 0) 
+						? core->camera->y_angle % 360
+						: 360 - (ABS(core->camera->y_angle) % -360);
+	point->x = center.x + x * cos(TO_RADS(core->camera->y_angle))
+				+ z * sin(TO_RADS(core->camera->x_angle));
+	point->z = center.z + (-z) * sin(TO_RADS(core->camera->x_angle))
+				+ z * cos(TO_RADS(core->camera->x_angle));
+}
+
+void	z_rotation(t_point *point, t_fdf *core)
+{
+	double			y;
+	double			x;
+	const t_point	center = {core->columns * core->camera->zoom / 2,
+								core->rows * core->camera->zoom / 2};
+
+	y = point->z - center.z;
+	x = point->x - center.x;
+	core->camera->z_angle = (core->camera->z_angle >= 0) 
+						? core->camera->z_angle % 360
+						: 360 - (ABS(core->camera->z_angle) % -360);
+	point->x = center.x + x * cos(TO_RADS(core->camera->z_angle))
+				- y * sin(TO_RADS(core->camera->x_angle));
+	point->y = center.y + x * sin(TO_RADS(core->camera->z_angle))
+				+ y * cos(TO_RADS(core->camera->x_angle));
+}
+
 t_point	get_work_point(t_point const *point, t_fdf *core)
 {
 	t_point res;
-
-	static int i = 0;
 
 	res = *point;
 	res.x *= core->camera->zoom;
 	res.y *= core->camera->zoom;
 	res.z *= core->camera->zoom;
+	// if (core->camera->x_angle)
+	// 	x_rotation(&res, core);
+	// if (core->camera->y_angle)
+	// 	y_rotation(&res, core);
+	// if (core->camera->z_angle)
+	// 	z_rotation(&res, core);
 	core->cur_projection(&res);
-	res.y += (double)(HEIGHT - core->rows * core->camera->zoom) / 2 + core->camera->x;
-	res.x += (double)(WIDTH - core->columns * core->camera->zoom) / 2  + core->camera->y;
-	i++;
+
+	res.y += (double)(HEIGHT - core->rows * core->camera->zoom) / 2 + core->camera->y;
+	res.x += (double)(WIDTH - core->columns * core->camera->zoom) / 2  + core->camera->x;
 	return res;
 }
 
-void loop(t_fdf *core)
+void draw(t_fdf *core)
 {
 	int x;
 	int y;
 
 	y = -1;
+	ft_bzero(core->window->img.matrix, WIDTH * HEIGHT * core->window->img.bpp);
 	while (core->matrix[++y])
 	{
 		x = -1;
@@ -85,6 +144,108 @@ void loop(t_fdf *core)
 	}
 	mlx_put_image_to_window(core->window->mlx_ptr, core->window->win_ptr,
 			core->window->img.img, 0, 0);
+}
+
+int		closewin(void *core)
+{
+	t_fdf	*x;
+	int		i;
+
+	x = core;
+	mlx_destroy_image(x->window->mlx_ptr, x->window->img.img);
+	mlx_destroy_window(x->window->mlx_ptr, x->window->win_ptr);
+	i = -1;
+	while (x->matrix[++i])
+		free(x->matrix[i]);
+	free(x->matrix);
+	system("leaks a.out");
+	exit(0);
+	return (0);
+}
+
+int		key_press(int key_code, void *param)
+{
+	t_fdf *core;
+
+	core = param;
+	if (key_code == 123 || key_code == 124)
+		core->camera->x_angle += (key_code == 123) ? -2 : 2;
+	else if (key_code == 125 || key_code == 126)
+		core->camera->z_angle += (key_code == 125) ? -2 : 2;
+	else if (key_code == 53)
+		closewin(param);
+	draw(core);
+	return (1);
+}
+
+int		mouse_press(int key_code, int x, int y, void *param)
+{
+	t_fdf *core;
+
+	core = param;
+	if ((core->camera->zoom >= 2 && key_code == 4) || key_code == 5)
+	{
+		core->camera->zoom += (key_code == 4) ? -2 : 2;
+		draw(core);
+	}
+	else if (key_code == 1)
+	{
+		core->left.x = x;
+		core->left.y = y;
+		core->left.button_clicked = 1;
+	}
+	else if (key_code == 2)
+	{
+		core->right.x = x;
+		core->right.y = y;
+		core->right.button_clicked = 1;
+	}
+	return (0);
+}
+
+int		mouse_release(int key_code, int x, int y, void *param)
+{
+	t_fdf *core;
+
+	core = param;
+	if (key_code == 1)
+		core->left.button_clicked = 0;
+	else if (key_code == 2)
+		core->right.button_clicked = 0;
+	return (0);	
+}	
+
+int		mouse_move(int x, int y, void *param)
+{
+	t_fdf	*core;
+
+	core = param;
+	if (core->left.button_clicked)
+	{
+		core->camera->x += core->left.x - x;
+		core->camera->y += core->left.y - y;
+		core->left.x = x;
+		core->left.y = y;
+	}
+	else if (core->right.button_clicked)
+	{
+		core->camera->y_angle += core->right.y - y;
+		core->camera->x_angle += core->right.x - x;
+		core->right.x = x;
+		core->right.y = y;
+	}
+	if (core->right.button_clicked || core->left.button_clicked)
+		draw(core);
+	return (0);
+}
+
+void	handle_keys(t_fdf *core)
+{
+	mlx_hook(core->window->win_ptr, 2, 0, key_press, core);
+	mlx_hook(core->window->win_ptr, 17, 0, closewin, core);
+	mlx_hook(core->window->win_ptr, 4, 0, mouse_press, core);
+	mlx_hook(core->window->win_ptr, 5, 0, mouse_release, core);
+	mlx_hook(core->window->win_ptr, 6, 0, mouse_move, core);
 }
 
 int main(int ac, char **av)
@@ -108,8 +269,8 @@ int main(int ac, char **av)
 	configure_mlx(core.window);
 	core.window->color = 0xff0000;
 	core.cur_projection = iso;
-	ft_printf("%d\n", ft_len(core.matrix, 8));
-	loop(&core);
+	draw(&core);
+	handle_keys(&core);
 	system("leaks fdf2");
 	mlx_loop(core.window->mlx_ptr);
 //	sleep(100);

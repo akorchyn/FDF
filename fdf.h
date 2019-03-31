@@ -10,8 +10,8 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#define WIDTH		800
-#define HEIGHT		600
+#define WIDTH		1280
+#define HEIGHT		720
 #define WIN_NAME	"FDF"
 
 #define TO_RADS(angle) ((angle) * M_PI / 180.0)
@@ -56,9 +56,20 @@ typedef void	(*projection)(t_point * const);
 typedef struct	s_camera
 {
 	int x;
+	int x_angle;
+	int y_angle;
+	int z_angle;
 	int y;
+	int z;
 	int zoom;
 }				t_camera;
+
+typedef struct	s_button
+{
+	int			x;
+	int			y;
+	int			button_clicked : 1;
+}				t_button;
 
 typedef struct	s_fdf
 {
@@ -66,6 +77,8 @@ typedef struct	s_fdf
 	t_point		**matrix;
 	t_camera	*camera;
 	projection	cur_projection;
+	t_button	left;
+	t_button	right;
 	int 		columns;
 	int 		rows;
 }				t_fdf;

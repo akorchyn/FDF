@@ -118,8 +118,7 @@ void drawline(t_point one, t_point two, t_window *win)
 	x.error = x.deltax - x.deltay;
 	while (x.x1 != x.x2 || x.y1 != x.y2)
 	{
-		printf("%d\t%d\n", x.x1, x.x2);
-		put_img_pixel(win->img.img, x.x1, x.y1, win->color);
+		put_img_pixel(&win->img, x.x1, x.y1, win->color);
 		x.error2 = x.error * 2;
 
 		if (x.error2 > -x.deltay)
