@@ -10,8 +10,8 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#define WIDTH		1280
-#define HEIGHT		720
+#define WIDTH		1500
+#define HEIGHT		800
 #define WIN_NAME	"FDF"
 
 #define TO_RADS(angle) ((angle) * M_PI / 180.0)

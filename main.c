@@ -83,23 +83,6 @@ void	y_rotation(t_point *point, t_fdf *core)
 				+ z * cos(TO_RADS(core->camera->x_angle));
 }
 
-void	z_rotation(t_point *point, t_fdf *core)
-{
-	double			y;
-	double			x;
-	const t_point	center = {core->columns * core->camera->zoom / 2,
-								core->rows * core->camera->zoom / 2};
-
-	y = point->z - center.z;
-	x = point->x - center.x;
-	core->camera->z_angle = (core->camera->z_angle >= 0) 
-						? core->camera->z_angle % 360
-						: 360 - (ABS(core->camera->z_angle) % -360);
-	point->x = center.x + x * cos(TO_RADS(core->camera->z_angle))
-				- y * sin(TO_RADS(core->camera->x_angle));
-	point->y = center.y + x * sin(TO_RADS(core->camera->z_angle))
-				+ y * cos(TO_RADS(core->camera->x_angle));
-}
 
 t_point	get_work_point(t_point const *point, t_fdf *core)
 {
@@ -109,13 +92,13 @@ t_point	get_work_point(t_point const *point, t_fdf *core)
 	res.x *= core->camera->zoom;
 	res.y *= core->camera->zoom;
 	res.z *= core->camera->zoom;
-	// if (core->camera->x_angle)
-	// 	x_rotation(&res, core);
-	// if (core->camera->y_angle)
-	// 	y_rotation(&res, core);
+	if (core->camera->x_angle)
+		x_rotation(&res, core);
+	if (core->camera->y_angle)
+		y_rotation(&res, core);
 	// if (core->camera->z_angle)
 	// 	z_rotation(&res, core);
-	core->cur_projection(&res);
+	// core->cur_projection(&res);
 
 	res.y += (double)(HEIGHT - core->rows * core->camera->zoom) / 2 + core->camera->y;
 	res.x += (double)(WIDTH - core->columns * core->camera->zoom) / 2  + core->camera->x;
@@ -229,8 +212,8 @@ int		mouse_move(int x, int y, void *param)
 	}
 	else if (core->right.button_clicked)
 	{
-		core->camera->y_angle += core->right.y - y;
-		core->camera->x_angle += core->right.x - x;
+		core->camera->x_angle += core->right.y - y;
+		core->camera->y_angle += core->right.x - x;
 		core->right.x = x;
 		core->right.y = y;
 	}
