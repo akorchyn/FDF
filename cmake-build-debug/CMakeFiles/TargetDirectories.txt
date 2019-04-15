@@ -1,3 +1,0 @@
-/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Volumes/Storage/goinfre/akorchyn/fdf/cmake-build-debug/CMakeFiles/fdf2.dir
