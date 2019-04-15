@@ -6,11 +6,11 @@
 /*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 23:17:43 by akorchyn          #+#    #+#             */
-/*   Updated: 2019/03/30 23:23:45 by akorchyn         ###   ########.fr       */
+/*   Updated: 2019/04/15 21:04:15 by akorchyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "includes/fdf.h"
 
 static int		open_file(char *filename)
 {
@@ -23,22 +23,6 @@ static int		open_file(char *filename)
 	if ((fd = open(filename, O_RDONLY)) == -1 || read(fd, NULL, 0) == -1)
 		put_error(filename, strerror(errno), FILE_ERROR);
 	return (fd);
-}
-
-static t_point	**increase_matrix(t_point **x)
-{
-	int		size;
-	t_point **new;
-	int		i;
-
-	i = -1;
-	size = x ? ft_len(x, sizeof(t_point **)) : 0;
-	if (!(new = (t_point **)ft_memalloc(sizeof(t_point *) * (size + 2))))
-		put_error(NULL, "Can't allocate memory", MEMORY_ALLOCATION);
-	while (++i < size)
-		new[i] = x[i];
-	free(x);
-	return (new);
 }
 
 static int		bad_line(char *tmp)
@@ -57,7 +41,7 @@ static int		bad_line(char *tmp)
 		}
 		else if (*tmp == ',')
 		{
-			tmp++;
+			tmp += 3;
 			check_valid = ft_isxdigit;
 		}
 		else
@@ -87,36 +71,61 @@ static t_point	*get_points(char **points, t_fdf *core, int row)
 		result[i].x = i;
 		result[i].y = row;
 		result[i].z = ft_atoi(numbers[0]);
-		result[i].color = (numbers[1]) ? ft_hex(numbers[1] + 2) : 0;
+		result[i].color = (numbers[1]) ? ft_hex(numbers[1] + 2) : 0xFFFFFF;
 		ft_freesplit(numbers);
 	}
 	return (result);
 }
 
-void			parse(char *filename, t_fdf *core)
+t_list			*get_file(char *filename)
 {
-	int		fd;
-	char	**points;
-	int		y;
+	t_list	*head;
+	t_list	*tmp;
 	int		ret;
+	int		fd;
 	char	*line;
 
-	y = 0;
+	head = NULL;
 	fd = open_file(filename);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (bad_line(line))
 			put_error(filename, "Map error", FILE_ERROR);
-		core->matrix = increase_matrix(core->matrix);
-		if (!(points = ft_strsplit(line, ' ')))
-			put_error(NULL, "Memory allocation failed", MEMORY_ALLOCATION);
-		core->matrix[y] = get_points(points, core, y);
-		y++;
-		ft_freesplit(points);
-		free(line);
+		tmp = ft_lstnew(NULL, 0);
+		tmp->content = line;
+		tmp->next = head;
+		head = tmp;
 	}
 	if (ret == -1)
 		put_error(filename, "Error file reading", FILE_ERROR);
-	core->rows = y;
 	close(fd);
+	ft_reverse_list((void ***)&head);
+	return (head);
+}
+
+void			parse(char *filename, t_fdf *core)
+{
+	char	**points;
+	int		i;
+	t_list	*file;
+	t_list	*tmp;
+
+	i = 0;
+	file = get_file(filename);
+	core->rows = ft_list_counter((void **)file);
+	if (!(core->matrix =
+			(t_point **)ft_memalloc(sizeof(t_point *) * (core->rows + 1))))
+		put_error(NULL, "Can't allocate memory", MEMORY_ALLOCATION);
+	while (file)
+	{
+		tmp = file->next;
+		if (!(points = ft_strsplit(file->content, ' ')))
+			put_error(NULL, "Memory allocation failed", MEMORY_ALLOCATION);
+		core->matrix[i] = get_points(points, core, i);
+		i++;
+		ft_freesplit(points);
+		free(file->content);
+		free(file);
+		file = tmp;
+	}
 }
