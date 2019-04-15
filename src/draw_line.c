@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/fdf.h"
+#include "fdf.h"
 
 static void		put_img_pixel(t_image *img, int x, int y, int color)
 {
