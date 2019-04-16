@@ -19,7 +19,7 @@ OBJ_LIST = $(addprefix obj/, $(addsuffix .o, $(FILE)))
 all: create_dir $(NAME)
 
 $(NAME): $(OBJ_LIST) $(LIBFT)
-	@echo "\x1b[33mCFDF linking\x1b[0m"
+	@echo "\x1b[33mFDF linking\x1b[0m"
 	@$(CC) $(OBJ_LIST) $(LIBFT) -o $(NAME) $(MLX)
 	@echo "\x1b[32mSuccessful\x1b[0m"
 
