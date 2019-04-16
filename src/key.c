@@ -6,7 +6,7 @@
 /*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 20:50:05 by akorchyn          #+#    #+#             */
-/*   Updated: 2019/04/16 17:41:59 by akorchyn         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:04:23 by akorchyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		mouse_press(int key_code, int x, int y, void *param)
 	t_fdf *core;
 
 	core = param;
-	if ((core->camera->zoom >= 2 && key_code == 4) || key_code == 5)
+	if ((core->camera->zoom > 2 && key_code == 4) || key_code == 5)
 	{
 		core->camera->zoom += (key_code == 4) ? -2 : 2;
 		draw(core);
