@@ -6,7 +6,7 @@
 /*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 20:53:17 by akorchyn          #+#    #+#             */
-/*   Updated: 2019/04/16 17:40:44 by akorchyn         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:45:21 by akorchyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	x_rotation(t_point *point, t_fdf *core)
 	double			y;
 	double			z;
 	const double	tmp = core->columns * core->camera->zoom / 2;
-	const t_point	center = {tmp, core->rows * core->camera->zoom / 2, 0, 0, 0};
+	const double	tmp1 = core->rows * core->camera->zoom / 2;
+	const t_point	center = {tmp, tmp1, 0, 0, 0};
 
 	y = point->y - center.y;
 	z = point->z - center.z;
@@ -48,7 +49,8 @@ void	y_rotation(t_point *point, t_fdf *core)
 	double			z;
 	double			x;
 	const double	tmp = core->columns * core->camera->zoom / 2;
-	const t_point	center = {tmp, core->rows * core->camera->zoom / 2, 0, 0, 0};
+	const double	tmp1 = core->rows * core->camera->zoom / 2;
+	const t_point	center = {tmp, tmp1, 0, 0, 0};
 
 	z = point->z - center.z;
 	x = point->x - center.x;
@@ -60,8 +62,8 @@ void	y_rotation(t_point *point, t_fdf *core)
 
 t_point	get_work_point(t_point const *point, t_fdf *core)
 {
-	t_point res;
-	int		colors[] = {0, 0xFF0000, 0xFF00, 0xFF};
+	t_point			res;
+	const int		colors[] = {0, 0xFF0000, 0xFF00, 0xFF};
 
 	res = *point;
 	res.x *= core->camera->zoom;

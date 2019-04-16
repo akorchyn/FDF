@@ -6,7 +6,7 @@
 /*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 20:50:05 by akorchyn          #+#    #+#             */
-/*   Updated: 2019/04/16 17:39:12 by akorchyn         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:41:59 by akorchyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int		closewin(void *core)
 	while (x->matrix[++i])
 		free(x->matrix[i]);
 	free(x->matrix);
-	exit(0);	return (0);
+	exit(0);
+	return (0);
 }
 
 int		key_press(int key_code, void *param)
