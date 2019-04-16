@@ -6,7 +6,7 @@
 /*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 23:17:43 by akorchyn          #+#    #+#             */
-/*   Updated: 2019/04/15 21:04:15 by akorchyn         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:30:04 by akorchyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static t_point	*get_points(char **points, t_fdf *core, int row)
 		result[i].y = row;
 		result[i].z = ft_atoi(numbers[0]);
 		result[i].color = (numbers[1]) ? ft_hex(numbers[1] + 2) : 0xFFFFFF;
+		numbers[1] && (result[i].color_set = 1);
 		ft_freesplit(numbers);
 	}
 	return (result);

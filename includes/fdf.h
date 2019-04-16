@@ -6,7 +6,7 @@
 /*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 20:59:54 by akorchyn          #+#    #+#             */
-/*   Updated: 2019/04/15 21:01:37 by akorchyn         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:38:33 by akorchyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct	s_point
 	double		y;
 	double		z;
 	int			color;
+	int			color_set : 1;
 }				t_point;
 
 typedef struct	s_image
@@ -57,6 +58,8 @@ typedef struct	s_window
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	unsigned	add_text_info : 1;
+	int			color_id;
 	t_image		img;
 }				t_window;
 

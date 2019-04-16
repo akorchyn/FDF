@@ -6,7 +6,7 @@
 /*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:53:30 by akorchyn          #+#    #+#             */
-/*   Updated: 2019/04/15 20:52:29 by akorchyn         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:21:03 by akorchyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,28 @@ static void		configure_mlx(t_fdf *core)
 	mlx_hook(core->window->win_ptr, 6, 0, mouse_move, core);
 }
 
+void			draw_text(t_fdf *core)
+{
+	if (!core->window->add_text_info)
+		mlx_string_put(core->window->mlx_ptr, core->window->win_ptr, 0, 0, 0xFF00FF,
+				"Press 'I' to get info");
+	else
+	{
+		mlx_string_put(core->window->mlx_ptr, core->window->win_ptr, 0, 0, 0xFF00FF,
+				"'ESC' to exit");
+		mlx_string_put(core->window->mlx_ptr, core->window->win_ptr, 0, 20, 0xFF00FF,
+				"'1', '2' to change projection");
+		mlx_string_put(core->window->mlx_ptr, core->window->win_ptr, 0, 40, 0xFF00FF,
+				"'Left Mouse' to move");
+		mlx_string_put(core->window->mlx_ptr, core->window->win_ptr, 0, 60, 0xFF00FF,
+				"'Right Mouse' to rotate");
+		mlx_string_put(core->window->mlx_ptr, core->window->win_ptr, 0, 80, 0xFF00FF,
+				"'Scroll' to zoom");
+		mlx_string_put(core->window->mlx_ptr, core->window->win_ptr, 0, 100, 0xFF00FF,
+					   "'Space' to change color");
+	}
+}
+
 void			draw(t_fdf *core)
 {
 	int x;
@@ -65,6 +87,7 @@ void			draw(t_fdf *core)
 	}
 	mlx_put_image_to_window(core->window->mlx_ptr, core->window->win_ptr,
 			core->window->img.img, 0, 0);
+	draw_text(core);
 }
 
 int				main(int ac, char **av)

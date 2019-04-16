@@ -6,7 +6,7 @@
 /*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 20:50:05 by akorchyn          #+#    #+#             */
-/*   Updated: 2019/04/15 20:50:07 by akorchyn         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:39:12 by akorchyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ int		closewin(void *core)
 	while (x->matrix[++i])
 		free(x->matrix[i]);
 	free(x->matrix);
-	exit(0);
-	return (0);
+	exit(0);	return (0);
 }
 
 int		key_press(int key_code, void *param)
 {
-	t_fdf *core;
+	t_fdf	*core;
 
 	core = param;
 	if (key_code == 53)
@@ -39,6 +38,10 @@ int		key_press(int key_code, void *param)
 		core->cur_projection = top_projection;
 	else if (key_code == 19)
 		core->cur_projection = iso_projection;
+	else if (key_code == 34)
+		core->window->add_text_info = core->window->add_text_info ? 0 : 1;
+	else if (key_code == 49)
+		core->window->color_id += (core->window->color_id == 3) ? -3 : 1;
 	if (key_code == 18 || key_code == 19 || key_code == 20)
 	{
 		core->camera->x_angle = 0;
