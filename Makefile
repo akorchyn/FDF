@@ -1,6 +1,6 @@
 .PHONY: all re fcleam clean create_dir
 
-NAME = corewar
+NAME = fdf
 
 CC = clang
 

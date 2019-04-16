@@ -99,7 +99,7 @@ t_list			*get_file(char *filename)
 	if (ret == -1)
 		put_error(filename, "Error file reading", FILE_ERROR);
 	close(fd);
-	ft_reverse_list((void ***)&head);
+	ft_reverse_list((void **)&head);
 	return (head);
 }
 

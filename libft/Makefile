@@ -17,7 +17,7 @@ SRC_STANDART = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_m
 SRC_PRINTF = itoa_base.c mask.c unsigned.c for_all.c printunicode.c binary_memory.c \
 	float.c itoa_base.c decimal_int.c ft_printf.c csp.c unicode.c badtype_perc.c
 
-SRC_LST = ft_lstmap.c ft_lstiter.c ft_lstadd.c ft_lstdel.c ft_lstdelone.c ft_lstnew.c ft_list_counter.c
+SRC_LST = ft_lstmap.c ft_lstiter.c ft_lstadd.c ft_lstdel.c ft_lstdelone.c ft_lstnew.c ft_list_counter.c ft_reverse_list.c
 
 SRC_MY_FUNCTION = ft_isxdigit.c ft_freesplit.c get_next_line.c ft_putred.c ft_len.c ft_isnumeric.c ft_pow.c ft_hex.c
 

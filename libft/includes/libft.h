@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omegan4ik <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 11:07:52 by akorchyn          #+#    #+#             */
-/*   Updated: 2019/03/29 00:50:43 by omegan4ik        ###   ########.fr       */
+/*   Updated: 2019/04/16 16:59:09 by akorchyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 
 typedef struct		s_list
 {
+	struct s_list	*next;
 	void			*content;
 	size_t			content_size;
-	struct s_list	*next;
 }					t_list;
 
 void				*ft_memset(void *dest, int c, size_t count);
@@ -99,5 +99,6 @@ int					ft_list_counter(void **list);
 int					ft_isnumeric(char *str, int c);
 int32_t				ft_pow(int32_t number, int32_t power);
 int					ft_hex(const char *str);
+void				ft_reverse_list(void **list);
 
 #endif

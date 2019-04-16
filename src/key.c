@@ -24,7 +24,6 @@ int		closewin(void *core)
 	while (x->matrix[++i])
 		free(x->matrix[i]);
 	free(x->matrix);
-	system("leaks fdf");
 	exit(0);
 	return (0);
 }
