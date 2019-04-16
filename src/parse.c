@@ -30,6 +30,8 @@ static int		bad_line(char *tmp)
 	int		(*check_valid)(int);
 
 	check_valid = ft_isdigit;
+	if (!tmp)
+		return 1;
 	while (*tmp)
 	{
 		while (*tmp && check_valid(*tmp))
@@ -113,6 +115,8 @@ void			parse(char *filename, t_fdf *core)
 
 	i = 0;
 	file = get_file(filename);
+	if (!file)
+		put_error(NULL, "Empty file", FILE_ERROR);
 	core->rows = ft_list_counter((void **)file);
 	if (!(core->matrix =
 			(t_point **)ft_memalloc(sizeof(t_point *) * (core->rows + 1))))

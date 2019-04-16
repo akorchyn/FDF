@@ -14,6 +14,7 @@
 # define FDF_FDF_H
 
 # include <math.h>
+# include <stdio.h>
 # include <mlx.h>
 # include "../libft/includes/libft.h"
 # include <string.h>
@@ -22,8 +23,13 @@
 # include <errno.h>
 # include <stdlib.h>
 
+# ifdef __linux__
+# define WIDTH		1280
+# define HEIGHT		720
+# else
 # define WIDTH		1500
 # define HEIGHT		800
+# endif
 # define WIN_NAME	"FDF"
 
 # define TO_RADS(angle) ((angle) * M_PI / 180.0)

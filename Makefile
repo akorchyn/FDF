@@ -2,13 +2,22 @@
 
 NAME = fdf
 
+UNAME_S = $(shell uname -s)
+
 CC = clang
 
 FLAGS = -Wall -Wextra -Werror -c
 
-LIBFT = libft/libft.a
+LIBFT = libft/libft.a -lm
 
-MLX = -lmlx -framework AppKit -framework OpenGL
+MLX = -lmlx
+
+ifeq ($(UNAME_S),Linux)
+	MLX += -lXext -lX11
+endif
+ifeq ($(UNAME_S),Darwin)
+	MLX += -framework AppKit -framework OpenGL
+endif
 
 INCLUDES = -I includes
 

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "keys.h"
 
 int		closewin(void *core)
 {
@@ -33,17 +34,17 @@ int		key_press(int key_code, void *param)
 	t_fdf	*core;
 
 	core = param;
-	if (key_code == 53)
+	if (key_code == ESC)
 		closewin(param);
-	else if (key_code == 18)
+	else if (key_code == KEY_1)
 		core->cur_projection = top_projection;
-	else if (key_code == 19)
+	else if (key_code == KEY_2)
 		core->cur_projection = iso_projection;
-	else if (key_code == 34)
+	else if (key_code == KEY_I)
 		core->window->add_text_info = core->window->add_text_info ? 0 : 1;
-	else if (key_code == 49)
+	else if (key_code == SPACE)
 		core->window->color_id += (core->window->color_id == 3) ? -3 : 1;
-	if (key_code == 18 || key_code == 19 || key_code == 20)
+	if (key_code == KEY_1 || key_code == KEY_2)
 	{
 		core->camera->x_angle = 0;
 		core->camera->y_angle = 0;
@@ -57,18 +58,21 @@ int		mouse_press(int key_code, int x, int y, void *param)
 	t_fdf *core;
 
 	core = param;
-	if ((core->camera->zoom > 2 && key_code == 4) || key_code == 5)
+	if ((core->camera->zoom > 2 && key_code == MOUSE_SCROLL_DOWN)
+			|| key_code == MOUSE_SCROLL_UP)
 	{
-		core->camera->zoom += (key_code == 4) ? -2 : 2;
+	ft_printf("%d\n", key_code);
+
+		core->camera->zoom += (key_code == MOUSE_SCROLL_DOWN) ? -2 : 2;
 		draw(core);
 	}
-	else if (key_code == 1)
+	else if (key_code == MOUSE_LEFT_BUTTON)
 	{
 		core->left.x = x;
 		core->left.y = y;
 		core->left.button_clicked = 1;
 	}
-	else if (key_code == 2)
+	else if (key_code == MOUSE_RIGHT_BUTTON)
 	{
 		core->right.x = x;
 		core->right.y = y;
@@ -83,10 +87,11 @@ int		mouse_release(int key_code, int x, int y, void *param)
 
 	(void)x;
 	(void)y;
+	printf("%d\n", key_code);
 	core = param;
-	if (key_code == 1)
+	if (key_code == MOUSE_LEFT_BUTTON)
 		core->left.button_clicked = 0;
-	else if (key_code == 2)
+	else if (key_code == MOUSE_RIGHT_BUTTON)
 		core->right.button_clicked = 0;
 	return (0);
 }

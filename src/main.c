@@ -36,11 +36,11 @@ static void		configure_mlx(t_fdf *core)
 			&core->window->img.bpp, &core->window->img.size_line,
 			&core->window->img.endian);
 	core->window->img.bpp /= 8;
-	mlx_hook(core->window->win_ptr, 2, 0, key_press, core);
-	mlx_hook(core->window->win_ptr, 17, 0, closewin, core);
-	mlx_hook(core->window->win_ptr, 4, 0, mouse_press, core);
-	mlx_hook(core->window->win_ptr, 5, 0, mouse_release, core);
-	mlx_hook(core->window->win_ptr, 6, 0, mouse_move, core);
+	mlx_hook(core->window->win_ptr, 2, 1L << 0, key_press, core);
+	mlx_hook(core->window->win_ptr, 17, 1L << 17, closewin, core);
+	mlx_hook(core->window->win_ptr, 4, 1L << 2, mouse_press, core);
+	mlx_hook(core->window->win_ptr, 5, 1L << 3, mouse_release, core);
+	mlx_hook(core->window->win_ptr, 6, 1L << 6, mouse_move, core);
 }
 
 void			draw_text(t_fdf *core)

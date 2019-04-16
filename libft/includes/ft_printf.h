@@ -17,6 +17,14 @@
 # include <wchar.h>
 # include "libft.h"
 
+# ifdef __linux__
+
+typedef __uintmax_t uintmax_t;
+typedef __intmax_t intmax_t;
+
+# endif
+
+
 # define CHAR 0
 # define STRING 1
 # define POINTER 2
