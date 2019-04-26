@@ -87,7 +87,6 @@ int		mouse_release(int key_code, int x, int y, void *param)
 
 	(void)x;
 	(void)y;
-	printf("%d\n", key_code);
 	core = param;
 	if (key_code == MOUSE_LEFT_BUTTON)
 		core->left.button_clicked = 0;

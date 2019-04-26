@@ -8,7 +8,7 @@ CC = clang
 
 FLAGS = -Wall -Wextra -Werror -c
 
-LIBFT = libft/libft.a -lm
+LIBFT = libft/libft.a
 
 MLX = -lmlx
 
@@ -29,7 +29,7 @@ all: create_dir $(NAME)
 
 $(NAME): $(OBJ_LIST) $(LIBFT)
 	@echo "\x1b[33mFDF linking\x1b[0m"
-	@$(CC) $(OBJ_LIST) $(LIBFT) -o $(NAME) $(MLX)
+	@$(CC) $(OBJ_LIST) $(LIBFT) -o $(NAME) $(MLX) -lm
 	@echo "\x1b[32mSuccessful\x1b[0m"
 
 create_dir:
