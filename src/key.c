@@ -6,7 +6,7 @@
 /*   By: akorchyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 20:50:05 by akorchyn          #+#    #+#             */
-/*   Updated: 2019/04/16 18:04:23 by akorchyn         ###   ########.fr       */
+/*   Updated: 2019/06/01 14:03:20 by akorchyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ int		mouse_press(int key_code, int x, int y, void *param)
 	if ((core->camera->zoom > 2 && key_code == MOUSE_SCROLL_DOWN)
 			|| key_code == MOUSE_SCROLL_UP)
 	{
-	ft_printf("%d\n", key_code);
-
 		core->camera->zoom += (key_code == MOUSE_SCROLL_DOWN) ? -2 : 2;
 		draw(core);
 	}
